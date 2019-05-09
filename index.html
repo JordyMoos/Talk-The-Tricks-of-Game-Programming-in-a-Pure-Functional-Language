@@ -13,6 +13,19 @@
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/monokai.css">
 
+		<script src="js/jquery-1.12.0.min.js"></script>
+		<script src="js/countUp.js"></script>
+
+		<style>
+
+			img.we-are-pbwebmedia {
+				width: 1400px;
+				height: auto; }
+			.reveal img.reading-owl {
+				height: 1300px; }
+
+		</style>
+
 		<!-- Printing and PDF exports -->
 		<script>
 			var link = document.createElement( 'link' );
@@ -25,8 +38,152 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h2>The Tricks of Game Programming in a Pure Functional Language</h2>
+					<aside class="notes">
+						Welcome all to my talk about game programming in a functional language.
+					</aside>
+				</section>
+
+				<section>
+					<img class="we-are-pbwebmedia plain" src="img/pbwebmedia-logo.png">
+					<img class="reading-owl plain" src="img/pbwebmedia-uil-2.png">
+					<aside class="notes">
+						I work for Pbweb Media which is located in Haarlem.<br>
+						And we have some kind of affiliate websites.
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/pbwebmedia-tafelmetlunch.jpg" class="stretch plain">
+					<aside class="notes">
+						It's a pretty small company with only 16 employees.<br>
+						We have cozy lunches together as you can see around a quarter past 1<br>
+						Anyways I'm one of the six backend developers<br>
+					</aside>
+				</section>
+
+				<section>
+					<table>
+						<tr>
+							<td>Elasticsearch</td>
+							<td style="text-align: right; width: 50%"><h2>6,000</h2></td>
+						</tr>
+						<tr>
+							<td>Couchbase</td>
+							<td style="text-align: right"><h2>25,000</h2></td>
+						</tr>
+						<tr>
+							<td>Images</td>
+							<td style="text-align: right"><h2>60,000</h2></td>
+						</tr>
+					</table>
+					<aside class="notes">
+						With our affiliate sites we handle about 6,000 elasticsearch searches.<br>
+						25,000 couchbase requests<br>
+						And serve over 60,000 images<br>
+						I see people be like: Mheh, we have got about the same per month.<br>
+						This is per SECOND
+					</aside>
+				</section>
+
+				<section data-state="counters-pbweb">
+					<table>
+						<tr>
+							<td>Elasticsearch</td>
+							<td style="text-align: right; width: 50%"><h2 id="counter-elasticsearch"></h2></td>
+						</tr>
+						<tr>
+							<td>Couchbase</td>
+							<td style="text-align: right"><h2 id="counter-couchbase"></h2></td>
+						</tr>
+						<tr>
+							<td>Images</td>
+							<td style="text-align: right"><h2 id="counter-images"></h2></td>
+						</tr>
+					</table>
+					<script>
+						$(document).ready(function () {
+							var options = {
+								useEasing: false
+							};
+							var counterElasticsearch = new CountUp("counter-elasticsearch", 6000, 360000, 0, 59, options);
+							var counterCouchbase = new CountUp("counter-couchbase", 25000, 1500000, 0, 59, options);
+							var counterImages = new CountUp("counter-images", 60000, 3600000, 0, 59, options);
+							var drawCounters = function () {
+								counterElasticsearch.reset();
+								counterCouchbase.reset();
+								counterImages.reset();
+
+								counterElasticsearch.start();
+								counterCouchbase.start();
+								counterImages.start();
+							};
+							Reveal.addEventListener("counters-pbweb", drawCounters, false);
+						});
+					</script>
+					<aside class="notes">
+						That looks like this<br>
+					</aside>
+				</section>
+
+				<section>
+					<table>
+						<tr>
+							<td>Elasticsearch</td>
+							<td style="text-align: right"><h2>15,552,000,000</h2></td>
+						</tr>
+						<tr>
+							<td>Couchbase</td>
+							<td style="text-align: right"><h2>64,800,000,000</h2></td>
+						</tr>
+						<tr>
+							<td>Images</td>
+							<td style="text-align: right"><h2>155,520,000,000</h2></td>
+						</tr>
+					</table>
+					<aside class="notes">
+						That is like this in a month<br>
+						Pretty cool if you ask me
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/jordy-moos.png" class="plain">
+					<h2>Jordy Moos</h2>
+					<aside class="notes">
+						I'm Jordy Moos<br>
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/programming-since-the-age-of-12.png" class="stretch plain">
+					<aside class="notes">
+						I have been programming since about the age of 12.<br>
+						Well messing around with stuff on the computer.<br>
+						Can not really call that programming I suppose.
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/super-deal.png" class="stretch plain">
+					<aside class="notes">
+						Every now and then I get a bit bored and I want to learn a new language<br>
+						And with that I'm going to build something weird like this Action Housing addon for the game Elder Scrolls Online.<br>
+					</aside>
+				</section>
+
+				<section data-background-image="./img/elder-scrolls-online-rich.jpg">
+					<aside class="notes">
+						Which made me pretty rich which is nice.<br>
+						Well in-game of course.
+					</aside>
+				</section>
+
+				<section>
+
+				</section>
+
 			</div>
 		</div>
 
@@ -37,13 +194,17 @@
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
+				transition: 'fade',
+				pdfMaxPagesPerSlide: 1,
+				pdfSeparateFragments: false,
+				transitionSpeed: 'fast',
+				controls: false,
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
 					{ src: 'plugin/highlight/highlight.js', async: true }
 				],
-				controls: false,
 			});
 		</script>
 	</body>
