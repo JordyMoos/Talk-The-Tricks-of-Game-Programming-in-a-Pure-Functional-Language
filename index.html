@@ -240,7 +240,8 @@
 					</aside>
 				</section>
 
-				<section data-background-image="./img/build-together.jpeg">
+				<section>
+					<img src="./img/build-together.jpeg" class="stretch plain">
 					<aside class="notes">
 						I found the perfect victim with the same level of enthusiasm.<br>
 						But with more creativity and less years of programming experience<br>
@@ -266,34 +267,235 @@
 					<aside class="notes">
 						While python and the leds where out of the question. And still wanting to do something with this energy<br>
 						I decided to pick the most difficult game from a list of games I would like for the table<br>
-						And wanted to make that in Elm.<br>
 					</aside>
 				</section>
 
 				<section>
 					<img src="./img/boulder-dash-nes.jpg" class="stretch plain">
 					<aside class="notes">
-						I though if I could make Boulder Dash in Elm. Then I can probably make any of them in python<br>
+						I though if I could make Boulder Dash in Elm, a pure functional language. Then I can probably make any of them in python<br>
 						Who have played this game?<br>
 						The idea of the game is pretty simple<br> You are this little hero<br>
-						And you need to collect the diamonds<br>
+						And you need to collect the diamonds
 					</aside>
 				</section>
 
 				<section>
-					<img src="./img/elm-logo.png" class="stretch plain">
+					<a href="http://localhost:8001/?startLevel=talk/official-001-in-pixel&hideDebug=1&hideControls=1&hideControls=1&hideEdit=1" target="_blank">Demo</a>
 					<aside class="notes">
-						Every game programming book I have is based on object oriented programming. Most of them in c++ but other languages like Java follow the same patterns offcourse.<br>
-						Those language are object oriented after all.<br>
-						I was learning the functional paradim and played with Elm for a few year.<br>
-						And I wanted to try to see how it goes. To learn from an experiment.
+						Remember we are building a game for a 12 by 12 led table. This is all the graphics you can get.<br>
+						The green dot in the middle is our hero. Brown is dirt which we can walk through.<br>
+						Grey are rocks which fall down<br> Blue are the diamonds we need to collect<br>
+						And red is going to hurt us ;(
+					</aside>
+				</section>
+
+				<section>
+					<a href="http://localhost:8001/?startLevel=official/001&hideDebug=1&hideControls=1&hideControls=1&hideEdit=1" target="_blank">Demo Images</a>
+					<aside class="notes">
+						When I showed this, people where like mhe.<br>
+						So I added a image renderer to make it visually a bit more appealing
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-logo.png" class="plain">
+					<aside class="notes">
+						Every game programming book I have is based on object oriented programming. Most of them in c++ but other languages like Java follow the same patterns.<br>
+						I was learning the functional paradigm and played with Elm for a few year.<br>
+						And I wanted to try to see how it would be to create a game in Elm.<br>
+						To learn from an experiment.<br>
+						Who has used elm?
 					</aside>
 				</section>
 
 				<section data-background-image="./img/formula-1-chinese-gp-2019-afte-2.jpg">
 					<aside class="notes">
-						The game we are going to talk about is this recreating of Boulder Dash in Elm.<br>
-						And for the code sample to be understandable we should take a crash course of Elm.
+						To better understand how the game written and to understand the samples we are going to take a crash course into Elm.
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-logo.png" class="plain">
+					<aside class="notes">
+						Elm is a bit different then most of the languages out there.<br>
+						Which sometimes scare people off.<br>
+						But I actually find Elm one of the easiest languages to learn.
+					</aside>
+				</section>
+
+				<section>
+					<ul>
+						<li>Pure Functional language</li>
+						<li class="fragment">Statically Typed</li>
+						<li class="fragment">Strongly Typed</li>
+					</ul>
+					<aside class="notes">
+						Some of the characteristics of Elm is that it is a Pure Functional language, Its statically and stronly typed.<br>
+						Which allows the compiler to complain when I'm doing things wrong again<br>
+						But its complains are often so clear that you can learn a lot from the compiler
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-syntax-01.png" class="plain">
+					<aside class="notes">
+						A simple function in elm looks like this<br>
+						We have the name of the function `add`<br>
+						The arguments `x` and `y`<br>
+						And then on the right side of the equal sign is the body of the function
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-syntax-02.png" class="plain">
+					<aside class="notes">
+						Now everything in Elm is typed and you can annotate the function with its types<br>
+						Here we say the type of `add` is. We take a number, and a number.<br>
+						And then we will return a number.
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-syntax-03.png" class="plain">
+					<aside class="notes">
+						Applying functions is done by spaces.<br>
+						And function arguments are also separated by spaces<br>
+						Therefor we call `add` like this
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-syntax-04.png" class="plain">
+					<aside class="notes">
+						Everything in Elm is curried. Therefor you can call a function with less then all arguments<br>
+						And you will get back a function that requires the remaining arguments.<br>
+						Calling `add` with just `5` will give us a function that requires another argument before computing a result
+					</aside>
+				</section>
+
+				<section data-background-image="./img/architecture.jpg">
+					<aside class="notes">
+						So far Elm is not that different. At least to languages like Haskell.<br>
+						It is compared to javascript hehe<br>
+						What Elm also has is some kind of architecture
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-architecture-1.png" class="plain">
+					<aside class="notes">
+						In Elm you always have a Model, which is the state of your application<br>
+						update which is a function that creates new states<br>
+						And a view. Which is a function to visualize your state.<br>
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-architecture-2.png" class="plain">
+					<aside class="notes">
+						In this case we define to be just an integer
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-architecture-3.png" class="plain">
+					<aside class="notes">
+						To update your state, or to create a new model, you need to have some intend<br>
+						These you define as messages in Elm.<br>
+						This example is a little counter which you can increment and decrement
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-architecture-4.png" class="plain">
+					<aside class="notes">
+						A produced message together with your model will be given to the defined `update` function.<br>
+						Which in return will return a new model<br>
+						As we can see in the type of the update function as well.<br>
+						Given a msg and a model will return a model
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-architecture-5.png" class="plain">
+					<aside class="notes">
+						To visualize your state. You have the view function.<br>
+						Which received the model and returns some sort of html.
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-architecture.jpg" class="stretch plain">
+					<aside class="notes">
+						To visualize the architecture in one picture<br>
+						The puppets and their orientation is your Model<br>
+						The theater is the result of the view<br>
+						The kids are producing messages<br>
+						Which Mister `Update` received and it adjust the model as requested<br>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Game Programming</h2>
+					<aside class="notes">
+						Next up about game programming
+					</aside>
+				</section>
+
+				<section data-background-image="./img/movie-scene.jpg">
+					<aside class="notes">
+						When you create games you can look at it as if you are directing movies.<br>
+						This is the scene on a movie. Or a scene in your game.<br>
+						And those are Actors. Which will be Actors in our game as well.<br>
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/actor-scene-1.png" class="plain">
+					<aside class="notes">
+						To put it into perspective for the boulder dash game<br>
+						This is a scene with our hero and an enemy<br>
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/actor-scene-2.png" class="plain">
+					<aside class="notes">
+						I did not like the white background therefor I added a background image.<br>
+						Makes it look like a game already<br>
+						Its a pretty boring game, just those two actors standing there.
+					</aside>
+				</section>
+
+				<section data-background-image="./img/time.jpeg">
+					<aside class="notes">
+						To make the game come alive, you need to add some notion of time
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/game-loop-1.png" class="plain">
+					<aside class="notes">
+						Which we call the Game Loop<br>
+						A very simplistic one is this, update the game, and then sleep for some time<br>
+						And keep doing that forever<br>
+						Code samples with white background are pseudo code in a C like style<br>
+						<br>
+						This update function will be called once a second.<br>
+						Which you can use to update your game state.
+					</aside>
+				</section>
+
+				<section data-background-video="./img/game-loop-1.mp4" data-background-video-muted data-background-size="contain">
+					<aside class="notes">
+						Now if we let the actors move one tile each update then that will look like this<br>
+						I added walls so our update logic can use that to reverse direction
+					</aside>
+				</section>
+
+				<section>
+					<aside class="notes">
 					</aside>
 				</section>
 
@@ -308,21 +510,11 @@
 					https://www.praktijknieuwemaan.net/training-een-energiek-en-onrustig-kind-opvoeden/<br>
 					https://oldgameshelf.com/roms/nes/boulder-dash/images/nes_boulder_dash_2.jpg<br>
 					https://nl.motorsport.com/f1/news/verslag-derde-training-grand-prix-china-bottas-snelste-albon-crash/4369433/<br>
+					https://www.trendir.com/modernist-architecture/<br>
+					https://twitter.com/01k/status/986528602635358208?s=20<br>
+					http://thegioivanhoa.com.vn/kham-pha-hau-truong-dung-canh-thu-vi-cua-nhung-bo-phim-bom-tan-hollywood/<br>
+					https://www.deccanchronicle.com/science/science/300417/model-for-viable-time-machine-developed.html<br>
 					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
-					<aside class="notes">
-
-						But I did not promise I could not do some game programming.<br>
-						Its like my goto place. I can never promise not to do that<br>
-
-						We had this big list of games. And I was like if I can make the most difficult game in the list. In a language or paradigm which is not really accustomed for game programming.
-						Than I could make every game in python.
-
-						And that is how it started. I took boulder dash because of my nostalgic love for the game. And Elm because I was playing with it for some time.
-						And its a functional language. While all books i read about game programming. Assumed an object oriented language like c++
 					</aside>
 				</section>
 
