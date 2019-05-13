@@ -817,7 +817,7 @@
 
 				<section data-state="secret-enemy-section">
 					<video id="secret-enemy-video" controls autoplay>
-						<source src="./img/game-loop-1.mp4" type="video/mp4">
+						<source src="./img/secret-enemy.mp4" type="video/mp4">
 						Your browser does not support the video tag.
 					</video>
 					<script>
@@ -842,7 +842,7 @@
 				</section>
 
 				<section>
-					<a href="http://localhost:8001/?startLevel=talk/game-loop-walking-3&hideDebug=1&hideControls=1&hideControls=1&hideEdit=1" target="_blank">Demo</a>
+					<a href="http://localhost:8001/?startLevel=test/game-of-life&hideDebug=1&hideControls=1&hideControls=1&hideEdit=1&width=20&height=16" target="_blank">Demo Game of Life</a>
 					<aside class="notes">
 						Or you can watch game of life<br>
 						With game of life all "cells" base their decision on the same version of the field<br>
@@ -851,7 +851,7 @@
 				</section>
 
 				<section>
-					<a href="http://localhost:8001/?startLevel=talk/game-loop-walking-3&hideDebug=1&hideControls=1&hideControls=1&hideEdit=1" target="_blank">Demo</a>
+					<a href="http://localhost:8001/?startLevel=advent/official&hideDebug=1&hideControls=1&hideControls=1&hideEdit=1&width=25&height=25" target="_blank">Demo Advent of Code</a>
 					<aside class="notes">
 						You can also solve days 15 challenge of advent of code from previous year<br>
 						Where goblins and elves where fighting each other and you had to calculate some score
@@ -859,11 +859,153 @@
 				</section>
 
 				<section>
+					<img src="./img/advent-answer.png" class="plain">
+					<aside class="notes">
+						And that answer was correct.
+					</aside>
+				</section>
+
+				<section>
+					<h2>Serialization</h2>
+					<aside class="notes">
+						The components we created are just types. They are just data.<br>
+						And data is serializable<br>
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/serialization-1.png" class="plain">
+					<aside class="notes">
+						This simplifies tuning and changing the game<br>
+						This is a screen shot from the secret enemy we just saw
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/serialization-2.png" class="plain">
+					<aside class="notes">
+						Not only can we configure the actors and their behaviour<br>
+						But we can do that for the scene as well
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/serialization-3.png" class="stretch plain">
+					<aside class="notes">
+						And because our game is now in a serializable format<br>
+						We can use or create other tools to simplify the creation of that format even more<br>
+						Like there is this little level builder where you can create your own levels
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/serialization-4.png" class="stretch plain">
+					<aside class="notes">
+						Which you then upload and share on github!
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/serialization-5.png" class="stretch plain">
+					<aside class="notes">
+						In Elm this is not really interesting<br>
+						Its just a big file with json decoders<br>
+						There are plenty of articles online how to decode a json in elm
+					</aside>
+				</section>
+
+				<section>
+					<h2>Rendering</h2>
+					<aside class="notes">
+						We have not talked about rendering yet but its surprisingly easy.<br>
+						The rendering is about 400 lines of code which is not that much compared to the 7500 of code the whole game is.<br>
+						Luckily for me because I changed "output engine" a few times already
+					</aside>
+				</section>
+
+				<section data-state="first-renderer-section">
+					<video id="first-renderer-video" controls autoplay>
+						<source src="./img/first-renderer.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<script>
+						$(document).ready(function () {
+							Reveal.addEventListener("first-renderer-section", function () {
+								$('#first-renderer-video').currentTime = 0;
+								$('#first-renderer-video').load();
+							}, false);
+						});
+					</script>
+					<aside class="notes">
+						The first renderer was this ascii renderer<br>
+						Which maybe I should reintroduce
+					</aside>
+				</section>
+
+				<section>
+					<ul>
+						<li>Ascii</li>
+						<li>Canvas</li>
+					</ul>
+					<aside class="notes">
+						After that came the Canvas renderer. Which looked the same as the game looks now<br>
+						But it had two issues. One is performace, I had to redraw the whole scene every frame from scratch<br>
+						Or came up with some awesome algorithm to reduce the amount of drawings needed or something<br>
+						And problem two was that a technique used by the canvas library was depricated and got removed in elm 0.19
+					</aside>
+				</section>
+
+				<section>
+					<ul>
+						<li>Ascii</li>
+						<li>Canvas</li>
+						<li>Svg</li>
+					</ul>
+					<aside class="notes">
+						The third time I wrote in with Svg which outperformed canvas insanely<br>
+						When I was using canvas I configured the game at 12 fps<br>
+						And currently it can hit 60fps
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/renderer-1.png" class="stretch plain">
+					<aside class="notes">
+						I still return all the visible actors as result of the `view` function<br>
+						But between frames mostly only a few svg elements really changed<br>
+						Elm runtime or the browser can take advantage of that
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/renderer-2.png" class="stretch plain">
+					<aside class="notes">
+						Code wise all you have to do is create a new component which holds your rendering information<br>
+						Like pixel color, images etc
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/renderer-3.png" class="stretch plain">
+					<aside class="notes">
+						And the Elm architecture already provided us with a view function<br>
+						Where we can call the svg level rendering giving it information about the level<br>
+						There you just iterate over the actors and create svg elements
+					</aside>
+				</section>
+
+				<section>
+					<h2>Performance</h2>
 					<aside class="notes">
 					</aside>
 				</section>
 
 				<section>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section style="font-size: 12px">
 					https://www.elderscrollsonline.com/en-us/updates/dlc/thievesguild<br>
 					https://hackster.imgix.net/uploads/attachments/341676/20170822_012800_iwgpFxyWBr.jpg?auto=compress%2Cformat&w=900&h=675&fit=min<br>
 					https://medium.economist.com/can-we-know-what-animals-are-thinking-83991bc994c4<br>

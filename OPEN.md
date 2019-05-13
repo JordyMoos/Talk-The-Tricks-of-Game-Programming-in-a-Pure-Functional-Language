@@ -17,7 +17,15 @@ http://localhost:8001/?startLevel=official/001&hideDebug=1&hideControls=1&hideCo
 ```
 
 ```
-http://localhost:8001/?startLevel=talk/game-loop-walking-2&hideDebug=1&hideControls=1&hideControls=1&hideEdit=1&lazy=1
+http://localhost:8001/?startLevel=talk/game-loop-walking-3&hideDebug=1&hideControls=1&hideControls=1&hideEdit=1&lazy=1
+```
+
+```
+http://localhost:8001/?startLevel=test/game-of-life&hideDebug=1&hideControls=1&hideControls=1&hideEdit=1&width=20&height=16&lazy=1
+```
+
+```
+http://localhost:8001/?startLevel=advent/official&hideDebug=1&hideControls=1&hideControls=1&hideEdit=1&width=25&height=25&lazy=1
 ```
 
 
