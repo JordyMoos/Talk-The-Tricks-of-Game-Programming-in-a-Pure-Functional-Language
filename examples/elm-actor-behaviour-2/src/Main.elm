@@ -145,6 +145,24 @@ updateGameState model =
 
 
 
+--updateKillComponent : Actor -> List Actor
+--updateKillComponent actor =
+--    getActorNextToMe actor -- Returns: List Actor
+--        |> removeThoseFromTheListOfActors
+--            -- Ehh remove them from where?
+
+
+
+updateKillComponent : Actor -> List Actor -> List Actor
+updateKillComponent actor actors =
+    getActorNextToMe actor
+        |> removeThoseFromTheListOfActors actors
+
+
+
+removeThoseFromTheListOfActors : List Actor -> List Actor -> List Actor
+removeThoseFromTheListOfActors actors toBeRemovedActors = actors
+
 
 updateWalkAiComponent : Actor -> Actor
 updateWalkAiComponent actor =
@@ -233,5 +251,10 @@ burp =
         _ = updateWalkAiComponent
         _ = getTransformComponentDataFancy
         _ = updateActors
+        _ = updateKillComponent
     in
         ()
+
+
+getActorNextToMe : Actor -> List Actor
+getActorNextToMe actor = []
