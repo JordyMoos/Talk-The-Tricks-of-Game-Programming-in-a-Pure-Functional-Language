@@ -475,6 +475,7 @@
 				</section>
 
 				<section>
+					<h2>Game Loop</h2>
 					<img src="./img/game-loop-1.png" class="plain">
 					<aside class="notes">
 						Which we call the Game Loop<br>
@@ -487,10 +488,231 @@
 					</aside>
 				</section>
 
-				<section data-background-video="./img/game-loop-1.mp4" data-background-video-muted data-background-size="contain">
+				<section data-state="game-loop-1-section">
+					<video id="game-loop-1-video" controls autoplay>
+						<source src="./img/game-loop-1.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<script>
+						$(document).ready(function () {
+							Reveal.addEventListener("game-loop-1-section", function () {
+								$('#game-loop-1-video').currentTime = 0;
+								$('#game-loop-1-video').load();
+							}, false);
+						});
+					</script>
 					<aside class="notes">
 						Now if we let the actors move one tile each update then that will look like this<br>
 						I added walls so our update logic can use that to reverse direction
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/game-loop-2.png" class="plain">
+					<aside class="notes">
+						The game moves very slow and we can fix that to lower the sleep time.<br>
+						17 milliseconds will give us about 60 updates per second
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/game-loop-3.png" class="plain">
+					<aside class="notes">
+						Now we are not really calling update every 17ms.<br>
+						We forgot to take into account the time it took to run `update`<br>
+						If update takes about 10ms then together with sleep we only call update about once in the 27ms<br>
+						You can fix that by subtracting the time it took from the sleep
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/game-loop-4.png" class="plain">
+					<aside class="notes">
+						Another option would be to check how much time has passed since the last update<br>
+						And use that as some kind of delta time in update<br>
+						That within update you check how much actors must move based on the delta time<br>
+						An disadvantage of this is that too much time might have passed. And actor might jump pass walls
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/game-loop-5.png" class="plain">
+					<aside class="notes">
+						A safer bet is to have a stable update call. Which makes it unable for your game to make giant loops on slow computers<br>
+						If you split the update and view. You can do multiple update ticks in case too much time has passed the last loop.<br>
+						To let the game `catch up`. At the cost of drawing the game less frequent. Which we will see as "frame drops"
+					</aside>
+				</section>
+
+				<section>
+          <img src="./img/elm-game-loop-1.png" class="plain">
+					<aside class="notes">
+            Elm is a pure functional language and asking for the time is an impure operation.<br>
+            Time has this habit of changing a lot<br>
+            In order to get some time information you need to setup something called "Subscriptions"<br>
+            Which allows mechanisms outside of your app to send `Messages` which you can handle in a pure fashion.<br>
+            We define a message, setup a subscription to get that message every 17 milliseconds<br>
+            And handle the message
+					</aside>
+				</section>
+
+				<section>
+          <img src="./img/elm-game-loop-2.png" class="plain">
+					<aside class="notes">
+            We are running in the browser and the browser has some mechanism to redraw the screen.<br>
+            And to make animations look smoother we can kinda hook into that redraw mechanism<br>
+						We can do something similar as we did with time but then based on the browsers animation frame<br>
+						This time we get the amount of milliseconds passed instead of a "stable 17ms" like we had with time<br>
+						And therefor we should be doing some match instead of calling the update function everytime
+					</aside>
+				</section>
+
+				<section>
+          <img src="./img/game-loop-5.png" class="plain">
+					<aside class="notes">
+						Remembering our game loop. We would like to update on a stable 17 millisecond. For as many 17 milliseconds since we did our last loop<br>
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-game-loop-3.png" class="plain">
+					<aside class="notes">
+						You do not have for loops in Elm but we can create a List of a certain length and iterate over it<br>
+						Which we do with List.repeat<br> We determine how often our game speed has passed and create a list of the same length<br>
+						Because we need to update the game based on the previous update. We can fold over our list and use our model as the accumulator<br>
+						This will give us the sketched game loop
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-game-loop-4.png" class="plain">
+					<aside class="notes">
+						We can improve the game loop by limiting the amount of updates per "view".<br>
+						We do this to not make it look like our hero jumped far because of a game hickup<br>
+						This is easy by just taking x elements from our repeated list
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-game-loop-5.png" class="plain">
+					<aside class="notes">
+						Finally we should keep track of how many time we had left. Like 3ms if the timeSinceLast was 20ms.<br>
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-game-loop-6.png" class="plain">
+					<aside class="notes">
+						After the `update` function returned our new model, elm will call our view function again<br>
+						In which we will render the game
+					</aside>
+				</section>
+
+				<section>
+					<h2>Actors</h2>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/actor-component-1.png" class="plain">
+					<aside class="notes">
+						A way to have actors is to create the individuals.<br>
+						Like we have a Hero and an Enemy<br>
+						Which both have an `update` function.<br>
+						Which in turn gets called from the main loop
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/actor-component-2.png" class="plain">
+					<aside class="notes">
+						You add all the behaviours in those classes like walking and collection diamonds for our hero.<br>
+						And walking and killing heroes for the enemy
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/actor-component-3.png" class="plain">
+					<aside class="notes">
+						After a while you will end up with more and more actors<br>
+						Like a butterfly, which is an AI just like our Enemy but then being super cute instead of trying to kill the hero
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/actor-component-4.png" class="plain">
+					<aside class="notes">
+						This goes on and on and you end up with lots of actors which update functions get really big and messy<br>
+						Also you will notice you get lots of duplicate behaviour among your actors.
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/actor-component-5.png" class="plain">
+					<aside class="notes">
+						A solution in the object oriented world could be to introduce some form of inheritance<br>
+						Which is actually not really reusable and might give us "Diamonds of deaths"<br>
+						Like I have no clue how this update function would look like
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/actor-component-6.png" class="plain">
+					<aside class="notes">
+						Another more reusable approach would be to put the behavior in separate places, which we called components here<br>
+						And assign components to actors. Like our hero has the WalkComponent and CollectComponent or whatever<br>
+						And we would give our enemy the KillComponent.<br>
+						This way we can easily mix and match components and thereby create new actors with less effort
+					</aside>
+				</section>
+
+				<section>
+					<h3>Composition over Inheritance</h3>
+					<img src="./img/composition-over-inheritance.png" class="plain">
+					<aside class="notes">
+						The benefits of Composition over Inheritance<br>
+						This is nice because we do not have inheritance in Elm anyway hehe<br>
+						Elm can do the composition which we call the Actor Component system<br>
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-actor-component-1.png" class="plain">
+					<aside class="notes">
+						In Elm we can create our own type which we call Component<br>
+						And Component can by any of those specified options<br>
+						Its a bit like an Enum.<br>
+						Components can hold data like we give a String to TagComponent to represent the tag name<br>
+						And its can also have custom type or type aliases. Like we create some TransformComponentData record with x and y positions for the transform.
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-actor-component-2.png" class="plain">
+					<aside class="notes">
+						Once we have our components we can mix and match them to create actors.<br>
+						We define an actor as just a list of components and we create our hero and enemy.<br>
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-actor-component-3.png" class="plain">
+					<aside class="notes">
+						Now a little sidetrack<br>
+						ControllerInputComponent and WalkAiComponent kinda do the same thing. They control the actors movement etc<br>
+						Those components just do it in their own way, via collected input or some ai logic<br>
+						We could group them together under one ControlComponent to make it clearer that you should not have both<br>
+						Also you can keep giving data to your types like we give some AiSettings to ControlType
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-actor-component-4.png" class="plain">
+					<aside class="notes">
+						Constructing those components would then look like this<br>
+						You could still add the same component type with different settings ofcourse<br>
+						But there is no helping against yourself mechanism here
 					</aside>
 				</section>
 
@@ -514,6 +736,8 @@
 					https://twitter.com/01k/status/986528602635358208?s=20<br>
 					http://thegioivanhoa.com.vn/kham-pha-hau-truong-dung-canh-thu-vi-cua-nhung-bo-phim-bom-tan-hollywood/<br>
 					https://www.deccanchronicle.com/science/science/300417/model-for-viable-time-machine-developed.html<br>
+					https://javarevisited.blogspot.com/2013/06/why-favor-composition-over-inheritance-java-oops-design.html?m=1<br>
+
 					<aside class="notes">
 					</aside>
 				</section>
