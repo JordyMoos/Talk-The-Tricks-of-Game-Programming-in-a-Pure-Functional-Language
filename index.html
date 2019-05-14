@@ -350,8 +350,8 @@
 					<img src="./img/elm-syntax-02.png" class="plain">
 					<aside class="notes">
 						Now everything in Elm is typed and you can annotate the function with its types<br>
-						Here we say the type of `add` is. We take a number, and a number.<br>
-						And then we will return a number.
+						Here we say the type of `add` is:<br>
+						We take a number, and a number. And then we will return a number.
 					</aside>
 				</section>
 
@@ -373,11 +373,19 @@
 					</aside>
 				</section>
 
+				<section>
+					<img src="./img/elm-syntax-05.png" class="plain">
+					<aside class="notes">
+						Making these result into the same
+					</aside>
+				</section>
+
 				<section data-background-image="./img/architecture.jpg">
 					<aside class="notes">
 						So far Elm is not that different. At least to languages like Haskell.<br>
 						It is compared to javascript hehe<br>
-						What Elm also has is some kind of architecture
+						What Elm also has is some kind of architecture<br>
+						Its something that enforces the flow of your application
 					</aside>
 				</section>
 
@@ -410,7 +418,7 @@
 					<img src="./img/elm-architecture-4.png" class="plain">
 					<aside class="notes">
 						A produced message together with your model will be given to the defined `update` function.<br>
-						Which in return will return a new model<br>
+						Which will return a new model<br>
 						As we can see in the type of the update function as well.<br>
 						Given a msg and a model will return a model
 					</aside>
@@ -431,7 +439,7 @@
 						The puppets and their orientation is your Model<br>
 						The theater is the result of the view<br>
 						The kids are producing messages<br>
-						Which Mister `Update` received and it adjust the model as requested<br>
+						Which the `Update` person received and it adjust the model as requested<br>
 					</aside>
 				</section>
 
@@ -445,8 +453,8 @@
 				<section data-background-image="./img/movie-scene.jpg">
 					<aside class="notes">
 						When you create games you can look at it as if you are directing movies.<br>
-						This is the scene on a movie. Or a scene in your game.<br>
-						And those are Actors. Which will be Actors in our game as well.<br>
+						This is the scene of a movie. Or a scene in your game.<br>
+						And those are Actors. Which will be Actors in the game as well.<br>
 					</aside>
 				</section>
 
@@ -534,7 +542,7 @@
 					<aside class="notes">
 						Another option would be to check how much time has passed since the last update<br>
 						And use that as some kind of delta time in update<br>
-						That within update you check how much actors must move based on the delta time<br>
+						Than within update you check how much actors must move based on the delta time<br>
 						An disadvantage of this is that too much time might have passed. And actor might jump pass walls
 					</aside>
 				</section>
@@ -542,9 +550,10 @@
 				<section>
 					<img src="./img/game-loop-5.png" class="plain">
 					<aside class="notes">
-						A safer bet is to have a stable update call. Which makes it unable for your game to make giant loops on slow computers<br>
+						A safer bet is to have a stable update call. Which makes it unable for your game to make giant jumps on slow computers<br>
 						If you split the update and view. You can do multiple update ticks in case too much time has passed the last loop.<br>
-						To let the game `catch up`. At the cost of drawing the game less frequent. Which we will see as "frame drops"
+						To let the game `catch up`. At the cost of drawing the game less frequent. Which we will see as "frame drops"<br>
+						But at least he did not cheat by running pasted a wall
 					</aside>
 				</section>
 
@@ -567,14 +576,15 @@
             And to make animations look smoother we can kinda hook into that redraw mechanism<br>
 						We can do something similar as we did with time but then based on the browsers animation frame<br>
 						This time we get the amount of milliseconds passed instead of a "stable 17ms" like we had with time<br>
-						And therefor we should be doing some match instead of calling the update function everytime
+						And therefor we should be doing some math instead of calling the update function everytime
 					</aside>
 				</section>
 
 				<section>
           <img src="./img/game-loop-5.png" class="plain">
 					<aside class="notes">
-						Remembering our game loop. We would like to update on a stable 17 millisecond. For as many 17 milliseconds since we did our last loop<br>
+						Remembering our game loop. We would like to update on a stable 17 millisecond.<br>
+						For as many 17 milliseconds since we did our last loop<br>
 					</aside>
 				</section>
 
@@ -582,7 +592,8 @@
 					<img src="./img/elm-game-loop-3.png" class="plain">
 					<aside class="notes">
 						You do not have for loops in Elm but we can create a List of a certain length and iterate over it<br>
-						Which we do with List.repeat<br> We determine how often our game speed has passed and create a list of the same length<br>
+						Which we do with List.repeat<br>
+						We determine how often the 17ms has passed and create a list of the same length<br>
 						Because we need to update the game based on the previous update. We can fold over our list and use our model as the accumulator<br>
 						This will give us the sketched game loop
 					</aside>
@@ -621,7 +632,7 @@
 				<section>
 					<img src="./img/actor-component-1.png" class="plain">
 					<aside class="notes">
-						A way to have actors is to create the individuals.<br>
+						You will have actors for about everything in the game<br>
 						Like we have a Hero and an Enemy<br>
 						Which both have an `update` function.<br>
 						Which in turn gets called from the main loop
@@ -715,7 +726,7 @@
 					<img src="./img/elm-actor-component-4.png" class="plain">
 					<aside class="notes">
 						Constructing those components would then look like this<br>
-						You could still add the same component type with different settings ofcourse<br>
+						You could still add the same component type with different settings off course<br>
 						But there is no helping against yourself mechanism here
 					</aside>
 				</section>
@@ -735,7 +746,7 @@
 					<aside class="notes">
 						Here we have a very naive walking implementation for the WalkAiComponent<br>
 						Which will just make the actor move to the right<br>
-						We receive the actor that holds this component and we will net to fetch the transformComponent from the actor<br>
+						We receive the actor that holds this component and we will need to fetch the transformComponent from the actor<br>
 						Because the transform holds its current position<br>
 						After that we will walk one position to the right. Which will create a new transform component<br>
 						Which in turn needs to overwrite the current transform component of the actor<br>
