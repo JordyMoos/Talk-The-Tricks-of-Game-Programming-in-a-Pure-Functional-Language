@@ -476,9 +476,14 @@
 
 				<section>
 					<h2>Game Loop</h2>
-					<img src="./img/game-loop-1.png" class="plain">
 					<aside class="notes">
 						Which we call the Game Loop<br>
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/game-loop-1.png" class="plain">
+					<aside class="notes">
 						A very simplistic one is this, update the game, and then sleep for some time<br>
 						And keep doing that forever<br>
 						Code samples with white background are pseudo code in a C like style<br>
@@ -978,7 +983,7 @@
 				</section>
 
 				<section>
-					<img src="./img/renderer-2.png" class="stretch plain">
+					<img src="./img/renderer-2.png" class="plain">
 					<aside class="notes">
 						Code wise all you have to do is create a new component which holds your rendering information<br>
 						Like pixel color, images etc
@@ -986,7 +991,7 @@
 				</section>
 
 				<section>
-					<img src="./img/renderer-3.png" class="stretch plain">
+					<img src="./img/renderer-3.png" class="plain">
 					<aside class="notes">
 						And the Elm architecture already provided us with a view function<br>
 						Where we can call the svg level rendering giving it information about the level<br>
@@ -997,10 +1002,120 @@
 				<section>
 					<h2>Performance</h2>
 					<aside class="notes">
+						We will end with performance<br> How to make sure the game actually runs at a decent frame rate.<br>
+						One optimization we already discussed, which was using a better renderer.
 					</aside>
 				</section>
 
 				<section>
+					<img src="./img/elm-performance-1.png" class="plain">
+					<aside class="notes">
+						I'm doing a lot of looking up actors therefor I gave the actors an Id<br>
+						And stored them in a Dict with their id as the key<br>
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-performance-2.png" class="plain">
+					<aside class="notes">
+						I did the same for components which makes updating a certain component easier<br>
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-performance-3.png" class="plain">
+					<aside class="notes">
+						And I really often need to search actors by a position/coordinate<br>
+						Therefor I created indices which are dicts from position to actor id<br>
+						Now all of these changes are to minimize the time needed searching for actors<br>
+						A dict loopup is faster then iterating over a large list
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-performance-4.png" class="plain">
+					<aside class="notes">
+						An other way to optimize performance is to not give "update ticks" to all actors<br>
+						In the main loop I'm only updating actors which are in the view and some additional actors just outside the view
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-performance-5.png" class="plain">
+					<aside class="notes">
+						To `update` even less actors<br> Actors are split into two types. Static actors and dynamic actors<br>
+						Where the difference is that dynamic actors hold components that needs update ticks<br>
+						While static actors does not.<br>
+						In the boulder game things like dirt and wall are static. While rocks and the hero are dynamic actors
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-performance-6.png" class="plain">
+					<aside class="notes">
+						This is somewhere inside the game loop where I'm only getting actors which are dynamic
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-performance-7.png" class="plain">
+					<aside class="notes">
+						Another performance optimization is that I'm not actually creating the view, when the view method of elm gets called<br>
+						This view will get called by "the elm engine" every time that the model changes<br>
+						But I know that certain messages do not change the game state and therefor not the visual output<br>
+						Messages like key inputs<br>
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-performance-8.png" class="plain">
+					<aside class="notes">
+						Therefor I create the view myself whenever I know it changed and store that as part of my model.<br>
+						To be clear this happends in the elm `update` function
+					</aside>
+				</section>
+
+				<section>
+					<img src="./img/elm-performance-9.png" class="plain">
+					<aside class="notes">
+						And the last one, if someone comes up with a faster implementation for an operation you use a lot<br>
+						Then you proudly copy his implementation for your game
+					</aside>
+				</section>
+
+				<section>
+					<h2>Toughest Lesson Learned</h2>
+					<aside class="notes">
+						The close I would like to share the toughest lesson learned which was most definitely keeping track of what your "newest" actor/level or model is<br>
+						I have had a few times that I was like wtf is going on why is not this working<br>
+						And then the conclusion was that I did not update the actor in the accumulated level and there for changes where lost etc<br>
+						These are nifty bugs to find
+					</aside>
+				</section>
+
+				<section>
+					<h1>Thank you</h1>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h2>Elm Pixel Boulder Game</h2>
+					<p>
+						<a href="https://github.com/JordyMoos/elm-pixel-boulder-game">https://github.com/JordyMoos/elm-pixel-boulder-game</a>
+						<a href="https://jordymoos.github.io/elm-pixel-boulder-game/?hideDebug=1">https://jordymoos.github.io/elm-pixel-boulder-game/?hideDebug=1</a>
+					</p>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h3>About me</h3>
+					<p>
+						<a href="https://www.linkedin.com/in/jordy-moos-8a809754/">https://www.linkedin.com/in/jordy-moos-8a809754/</a><br>
+						<a href="https://twitter.com/jordymoos">https://twitter.com/jordymoos</a><br>
+						<a href="https://github.com/jordymoos">https://github.com/jordymoos</a>
+					</p>
 					<aside class="notes">
 					</aside>
 				</section>
@@ -1021,7 +1136,7 @@
 					http://thegioivanhoa.com.vn/kham-pha-hau-truong-dung-canh-thu-vi-cua-nhung-bo-phim-bom-tan-hollywood/<br>
 					https://www.deccanchronicle.com/science/science/300417/model-for-viable-time-machine-developed.html<br>
 					https://javarevisited.blogspot.com/2013/06/why-favor-composition-over-inheritance-java-oops-design.html?m=1<br>
-
+					https://discourse.elm-lang.org/t/2-3x-faster-list-concat-implementation/3533<br>
 					<aside class="notes">
 					</aside>
 				</section>
