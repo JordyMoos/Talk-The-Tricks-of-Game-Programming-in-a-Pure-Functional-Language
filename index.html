@@ -496,7 +496,7 @@
 						Code samples with white background are pseudo code in a C like style<br>
 						<br>
 						This update function will be called once a second.<br>
-						Which you can use to update your game state.
+						In which you will then update your game state.
 					</aside>
 				</section>
 
@@ -553,27 +553,27 @@
 						A safer bet is to have a stable update call. Which makes it unable for your game to make giant jumps on slow computers<br>
 						If you split the update and view. You can do multiple update ticks in case too much time has passed the last loop.<br>
 						To let the game `catch up`. At the cost of drawing the game less frequent. Which we will see as "frame drops"<br>
-						But at least he did not cheat by running pasted a wall
+						But at least the hero did not cheat by running past a wall
 					</aside>
 				</section>
 
 				<section>
-          <img src="./img/elm-game-loop-1.png" class="plain">
+				  	<img src="./img/elm-game-loop-1.png" class="plain">
 					<aside class="notes">
-            Elm is a pure functional language and asking for the time is an impure operation.<br>
-            Time has this habit of changing a lot<br>
-            In order to get some time information you need to setup something called "Subscriptions"<br>
-            Which allows mechanisms outside of your app to send `Messages` which you can handle in a pure fashion.<br>
-            We define a message, setup a subscription to get that message every 17 milliseconds<br>
-            And handle the message
+						Elm is a pure functional language and asking for the time is an impure operation.<br>
+						Time has this habit of changing a lot<br>
+						In order to get some time information you need to setup something called "Subscriptions"<br>
+						Which allows mechanisms outside of your app to send `Messages` which you can handle in a pure fashion.<br>
+						We define a message, setup a subscription to get that message every 17 milliseconds<br>
+						And handle the message
 					</aside>
 				</section>
 
 				<section>
-          <img src="./img/elm-game-loop-2.png" class="plain">
+          			<img src="./img/elm-game-loop-2.png" class="plain">
 					<aside class="notes">
-            We are running in the browser and the browser has some mechanism to redraw the screen.<br>
-            And to make animations look smoother we can kinda hook into that redraw mechanism<br>
+						We are running in the browser and the browser has some mechanism to redraw the screen.<br>
+						And to make animations look smoother we can kinda hook into that redraw mechanism<br>
 						We can do something similar as we did with time but then based on the browsers animation frame<br>
 						This time we get the amount of milliseconds passed instead of a "stable 17ms" like we had with time<br>
 						And therefor we should be doing some math instead of calling the update function everytime
@@ -581,7 +581,7 @@
 				</section>
 
 				<section>
-          <img src="./img/game-loop-5.png" class="plain">
+          			<img src="./img/game-loop-5.png" class="plain">
 					<aside class="notes">
 						Remembering our game loop. We would like to update on a stable 17 millisecond.<br>
 						For as many 17 milliseconds since we did our last loop<br>
@@ -635,7 +635,7 @@
 						You will have actors for about everything in the game<br>
 						Like we have a Hero and an Enemy<br>
 						Which both have an `update` function.<br>
-						Which in turn gets called from the main loop
+						Which should be called from the main loop
 					</aside>
 				</section>
 
@@ -688,7 +688,7 @@
 					<aside class="notes">
 						The benefits of Composition over Inheritance<br>
 						This is nice because we do not have inheritance in Elm anyway hehe<br>
-						Elm can do the composition which we call the Actor Component system<br>
+						Elm can do the composition which we call the Actor Component system in game programming<br>
 					</aside>
 				</section>
 
@@ -734,8 +734,8 @@
 				<section>
 					<h2>Implementing behaviour</h2>
 					<aside class="notes">
-						Types in Elm are just data they are not like objects which can have function and behaviour<br>
-						With other words, our components do not do anything yet.<br>
+						Types in Elm are just data. Rhey are not like objects which can have function and behaviour<br>
+						In other words, our components do not do anything yet.<br>
 						We need to add functions for their behaviours<br>
 						Now the fun stuff begins
 					</aside>
@@ -772,7 +772,7 @@
 					<img src="./img/elm-component-implementation-4.png" class="plain">
 					<aside class="notes">
 						walkRight will just create a new TransformData based on the current one but with x increased by one<br>
-						Affectively moving the actor a position to the right
+						Affectively moving the actor one position to the right
 					</aside>
 				</section>
 
@@ -791,8 +791,8 @@
 						Every game tick we would like to iterate over the actors to glue the actor component system with the main loop.<br>
 						Because components can change their actor we need to do some folding<br>
 						We fold over all the actors and let them call updateActor on each<br>
-						Then we update all components on the actor<br>
-						And then we will need to update our actor in the accumulator
+						Then we call the corresponding update for all components on the actor<br>
+						Those components might have changed the actor therefor we need to update the actor in the accumulator, which is the list of actors
 					</aside>
 				</section>
 
@@ -801,7 +801,7 @@
 					<aside class="notes">
 						I have added the actors to our model<br>
 						That way we can update the actors each game tick<br>
-						Give that function the actors and store the updated actors with the rest of our model, forming a new model<br>
+						Give that `updateActors` function the actors and store the updated actors with the rest of our model, forming a new model<br>
 						<br>
 						This will actually work and we now have actors moving to the right which have that WalkAiComponent<br>
 						It might look like a lot of work but I can tell you.... It will get worse
@@ -811,7 +811,8 @@
 				<section>
 					<img src="./img/elm-component-implementation-8.png" class="plain">
 					<aside class="notes">
-						The kill component will find al neighbor actors and remove them from ehhh
+						The kill component will find al neighbor actors and remove them from ehhh<br>
+						Remove them from where?
 					</aside>
 				</section>
 
@@ -852,7 +853,22 @@
 				<section>
 					<a href="http://localhost:8001/?startLevel=talk/game-loop-walking-3&hideDebug=1&hideControls=1&hideControls=1&hideEdit=1" target="_blank">Demo</a>
 					<aside class="notes">
-						Or you can control the hero manually
+						Or you can control the hero manually<br>
+					</aside>
+				</section>
+
+				<section>
+					<a href="http://localhost:8001/?startLevel=talk/game-loop-walking-4&hideDebug=1&hideControls=1&hideControls=1&hideEdit=1" target="_blank">Demo move more</a>
+					<aside class="notes">
+						There is no logic in the code that we can just move our hero. Its all in the components<br>
+						We should as well be able to move all actors
+					</aside>
+				</section>
+
+				<section>
+					<a href="http://localhost:8001/?startLevel=talk/game-loop-walking-5&hideDebug=1&hideControls=1&hideControls=1&hideEdit=1" target="_blank">Demo move all</a>
+					<aside class="notes">
+						I actually meant all actors. Wall are are actors too
 					</aside>
 				</section>
 
@@ -923,7 +939,7 @@
 				<section>
 					<img src="./img/serialization-5.png" class="stretch plain">
 					<aside class="notes">
-						In Elm this is not really interesting<br>
+						In Elm deserialization this is not really interesting<br>
 						Its just a big file with json decoders<br>
 						There are plenty of articles online how to decode a json in elm
 					</aside>
@@ -966,7 +982,7 @@
 						After that came the Canvas renderer. Which looked the same as the game looks now<br>
 						But it had two issues. One is performace, I had to redraw the whole scene every frame from scratch<br>
 						Or came up with some awesome algorithm to reduce the amount of drawings needed or something<br>
-						And problem two was that a technique used by the canvas library was depricated and got removed in elm 0.19
+						And problem two was that a technique used by the canvas library was deprecated and got removed in elm 0.19
 					</aside>
 				</section>
 
@@ -977,18 +993,19 @@
 						<li>Svg</li>
 					</ul>
 					<aside class="notes">
-						The third time I wrote in with Svg which outperformed canvas insanely<br>
+						The third time I wrote it with Svg which outperformed canvas insanely<br>
 						When I was using canvas I configured the game at 12 fps<br>
-						And currently it can hit 60fps
+						And you still had frame drops on mobile<br>
+						And currently with svg it can hit 60fps
 					</aside>
 				</section>
 
 				<section>
 					<img src="./img/renderer-1.png" class="stretch plain">
 					<aside class="notes">
-						I still return all the visible actors as result of the `view` function<br>
+						I still recreate all the visible actors as result of the `view` function<br>
 						But between frames mostly only a few svg elements really changed<br>
-						Elm runtime or the browser can take advantage of that
+						Elm runtime or the browser can take advantage of that html nodes did not change
 					</aside>
 				</section>
 
@@ -1022,6 +1039,7 @@
 					<aside class="notes">
 						I'm doing a lot of looking up actors therefor I gave the actors an Id<br>
 						And stored them in a Dict with their id as the key<br>
+						Instead of as a list
 					</aside>
 				</section>
 
@@ -1035,7 +1053,7 @@
 				<section>
 					<img src="./img/elm-performance-3.png" class="plain">
 					<aside class="notes">
-						And I really often need to search actors by a position/coordinate<br>
+						And I really often need to search actors by a position<br>
 						Therefor I created indices which are dicts from position to actor id<br>
 						Now all of these changes are to minimize the time needed searching for actors<br>
 						A dict loopup is faster then iterating over a large list
@@ -1081,7 +1099,7 @@
 					<img src="./img/elm-performance-8.png" class="plain">
 					<aside class="notes">
 						Therefor I create the view myself whenever I know it changed and store that as part of my model.<br>
-						To be clear this happends in the elm `update` function
+						To be clear this happens in the elm `update` function
 					</aside>
 				</section>
 
@@ -1096,7 +1114,7 @@
 				<section>
 					<h2>Toughest Lesson Learned</h2>
 					<aside class="notes">
-						The close I would like to share the toughest lesson learned which was most definitely keeping track of what your "newest" actor/level or model is<br>
+						To close I would like to share the toughest lesson learned which was most definitely keeping track of what your "newest" actor/level or model is<br>
 						I have had a few times that I was like wtf is going on why is not this working<br>
 						And then the conclusion was that I did not update the actor in the accumulated level and there for changes where lost etc<br>
 						These are nifty bugs to find
