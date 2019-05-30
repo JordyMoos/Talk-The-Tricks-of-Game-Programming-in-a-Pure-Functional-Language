@@ -28,6 +28,10 @@ http://localhost:8001/?startLevel=test/game-of-life&hideDebug=1&hideControls=1&h
 http://localhost:8001/?startLevel=advent/official&hideDebug=1&hideControls=1&hideControls=1&hideEdit=1&width=25&height=25&lazy=1
 ```
 
+```
+http://localhost:8001/?startLevel=talk/optimization-1&hideDebug=1&hideControls=1&hideEdit=1&additionalViewBorder=10&lazy=1
+```
+
 
 ### Open editor Elm Pixel Boulder Game
 
