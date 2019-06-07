@@ -6,6 +6,11 @@ cd game
 python -m SimpleHTTPServer 8001
 ```
 
+```
+cd game-vr
+python -m SimpleHTTPServer 8002
+```
+
 ### Open games
 
 ```
@@ -30,6 +35,10 @@ http://localhost:8001/?startLevel=advent/official&hideDebug=1&hideControls=1&hid
 
 ```
 http://localhost:8001/?startLevel=talk/optimization-1&hideDebug=1&hideControls=1&hideEdit=1&additionalViewBorder=10&lazy=1
+```
+
+```
+http://localhost:8002/?startLevel=official/001&hideDebug=1&hideControls=1&hideEdit=1&lazy=1
 ```
 
 
