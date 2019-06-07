@@ -11,6 +11,11 @@ cd game-vr
 python -m SimpleHTTPServer 8002
 ```
 
+```
+cd game-ar
+python -m SimpleHTTPServer 8002
+```
+
 ### Open games
 
 ```
@@ -39,6 +44,10 @@ http://localhost:8001/?startLevel=talk/optimization-1&hideDebug=1&hideControls=1
 
 ```
 http://localhost:8002/?startLevel=official/001&hideDebug=1&hideControls=1&hideEdit=1&lazy=1
+```
+
+```
+http://localhost:8003/?startLevel=official/001&hideDebug=1&hideControls=1&hideEdit=1&lazy=1
 ```
 
 
