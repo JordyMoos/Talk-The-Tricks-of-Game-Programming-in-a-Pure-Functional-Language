@@ -13,7 +13,7 @@ python -m SimpleHTTPServer 8002
 
 ```
 cd game-ar
-python -m SimpleHTTPServer 8002
+python -m SimpleHTTPServer 8003
 ```
 
 ### Open games
