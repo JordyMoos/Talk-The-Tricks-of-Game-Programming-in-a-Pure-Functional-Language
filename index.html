@@ -204,19 +204,10 @@
 				</section>
 
 				<section>
-					<img src="./img/elm-logo.png" class="plain">
+					<img src="./img/game-books.jpg" class="plain">
 					<aside class="notes">
-						Every game programming book I have is based on object oriented programming. Most of them in c++ but other languages like Java follow the same patterns.<br>
-						I was learning the functional paradigm and played with Elm for a few years.<br>
-						And I wanted to try to see how it would be to create a game in Elm.<br>
-						To learn from an experiment.<br>
-						Who has used elm?
-					</aside>
-				</section>
-
-				<section data-background-image="./img/formula-1-chinese-gp-2019-afte-2.jpg">
-					<aside class="notes">
-						To better understand how the game written and to understand the samples we are going to take a crash course into Elm.
+						Every game programming book I have is in an imperative programming style.<br>
+						This whole project was to translate the game programming tactics to the functional style.
 					</aside>
 				</section>
 
@@ -271,7 +262,8 @@
 					<aside class="notes">
 						A very simplistic one is this, update the game, and then sleep for some time<br>
 						And keep doing that forever<br>
-						Code samples with white background are pseudo code in a C like style<br>
+						The code samples with white background are pseudo imperative style, as you would learn from those game programming book<br>
+						You should not really remember<br>
 						<br>
 						This update function will be called once a second.<br>
 						In which you will then update your game state.
@@ -292,8 +284,7 @@
 						});
 					</script>
 					<aside class="notes">
-						Now if we let the actors move one tile each update then that will look like this<br>
-						I added walls so our update logic can use that to reverse direction
+						Now if we let the actors move one tile each update then that will look like this
 					</aside>
 				</section>
 
@@ -719,7 +710,7 @@
 					<aside class="notes">
 						In Elm deserialization this is not really interesting<br>
 						Its just a big file with json decoders<br>
-						There are plenty of articles online how to decode a json in elm
+						There are plenty of articles and talks online how to decode a json in elm<br>
 					</aside>
 				</section>
 
@@ -843,6 +834,15 @@
 						And this is even more awesome on the mobile<br>
 						I have to admit, I need to work on the controls a bit.<br>
 						And also this is kinda useless, but so is the whole project
+					</aside>
+				</section>
+
+				<section>
+					<a href="http://localhost:8004/?startLevel=official/001&hideDebug=1&hideControls=1&hideEdit=1" target="_blank">Demo VR 3D</a>
+					<aside class="notes">
+						Or what about 3d?<br>
+						Oke I admit the models needs some work instead of being squares<br>
+						But it is really cool that you can easily change renderer
 					</aside>
 				</section>
 
