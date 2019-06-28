@@ -41,8 +41,7 @@
 				<section>
 					<h2>The Tricks of Game Programming in a Pure Functional Language</h2>
 					<aside class="notes">
-						Welcome all to my talk about game programming in a functional language.<br>
-						And I think you can guess the language.
+						Welcome all to my talk about game programming in a functional language.
 					</aside>
 				</section>
 
@@ -58,8 +57,7 @@
 					<img class="we-are-pbwebmedia plain" src="img/pbwebmedia-logo.png">
 					<img class="reading-owl plain" src="img/pbwebmedia-uil-2.png">
 					<aside class="notes">
-						And I work for a small company called PB Web Media which is located in the Netherlands.<br>
-						And at PB Web Media we have some kind of affiliate websites.
+						And I work for a small company called PB Web Media where we have some kind of affiliate system.
 					</aside>
 				</section>
 
@@ -79,10 +77,7 @@
 						</tr>
 					</table>
 					<aside class="notes">
-						With our affiliate sites we handle about 6,000 elasticsearch searches.<br>
-						25,000 couchbase requests<br>
-						And serve about 60,000 images<br>
-						And these number are per second
+						With that system we handled these requests.
 					</aside>
 				</section>
 
@@ -122,7 +117,7 @@
 						});
 					</script>
 					<aside class="notes">
-						Which looks like this<br>
+						And those are per second
 					</aside>
 				</section>
 
@@ -142,7 +137,7 @@
 						</tr>
 					</table>
 					<aside class="notes">
-						That is like this in a month
+						And that is even more per month
 					</aside>
 				</section>
 
@@ -156,16 +151,18 @@
 				<section>
 					<img src="./img/build-together.jpeg" class="stretch plain">
 					<aside class="notes">
-						And I wanted to build the led table with someone to make the experience even more fun.<br>
-						But we could not really find the time together to start<br>
+						And I wanted to build the led table with someone to make the experience of creating one even more fun.<br>
+						I found the victim<br>
+						But together we did not find the time
 					</aside>
 				</section>
 
 				<section data-background-image="./img/led-table.jpg">
 					<aside class="notes">
-						Therefor I though if I pick the most difficult game that I would like for the table.<br>
-						And build it in a pure functional language which is not really accustomed for game programming.<br>
-						Then I can make any of the games for the led table with ease.
+						To still do something with this energy I decided to pick the most difficult game that I would like for the table.<br>
+						And build it in a language which is not really accustomed for game programming.<br>
+						I thought if I can make the most difficult game that I wanted for the table, in a functional programming language.<br>
+						Then I could make all those game for the led table with ease
 					</aside>
 				</section>
 
@@ -331,15 +328,14 @@
 					<aside class="notes">
 						Elm is a pure functional language and asking for the time is an impure operation.<br>
 						Time has this habit of changing a lot<br>
-						In order to get some time information you need to setup something called "Subscriptions"<br>
-						Which allows mechanisms outside of your app to send `Messages` which you can handle in a pure fashion.<br>
+						In order to get some time information you need to setup a Subscriptions<br>
 						We define a message, setup a subscription to get that message every 17 milliseconds<br>
 						And handle the message
 					</aside>
 				</section>
 
 				<section>
-          			<img src="./img/elm-game-loop-2.png" class="plain">
+          <img src="./img/elm-game-loop-2.png" class="plain">
 					<aside class="notes">
 						We are running in the browser and the browser has some mechanism to redraw the screen.<br>
 						And to make animations look smoother we can kinda hook into that redraw mechanism<br>
@@ -466,7 +462,6 @@
 					<aside class="notes">
 						In Elm we can create our own type which we call Component<br>
 						And Component can by any of those specified options<br>
-						Its a bit like an Enum.<br>
 						Components can hold data like we give a String to TagComponent to represent the tag name<br>
 						And its can also have custom type or type aliases. Like we create some TransformComponentData record with x and y positions for the transform.
 					</aside>
@@ -701,7 +696,8 @@
 				<section>
 					<img src="./img/serialization-4.png" class="stretch plain">
 					<aside class="notes">
-						Which you then upload and share on github!
+						Which you then upload and share on github!<br>
+						For other people to play
 					</aside>
 				</section>
 
@@ -798,8 +794,7 @@
 				<section>
 					<h3>4th renderer?</h3>
 					<aside class="notes">
-						We are going to have a little sidetrack again. This sidetrack was not planned for the talk.<br>
-						Yesterday I attended the workshop of Nikolai which was about Augmented Reality in Haskell.
+						A few weeks ago I saw a talk about Augmented Reality in Haskell
 					</aside>
 				</section>
 
