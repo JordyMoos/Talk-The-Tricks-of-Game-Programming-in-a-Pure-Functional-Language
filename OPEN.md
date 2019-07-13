@@ -13,7 +13,12 @@ python -m SimpleHTTPServer 8002
 
 ```
 cd game-ar
-python -m SimpleHTTPServer 8002
+python -m SimpleHTTPServer 8003
+```
+
+```
+cd game-3d
+python -m SimpleHTTPServer 8004
 ```
 
 ### Open games
@@ -48,6 +53,10 @@ http://localhost:8002/?startLevel=official/001&hideDebug=1&hideControls=1&hideEd
 
 ```
 http://localhost:8003/?startLevel=official/001&hideDebug=1&hideControls=1&hideEdit=1&lazy=1
+```
+
+```
+http://localhost:8004/?startLevel=official/001&hideDebug=1&hideControls=1&hideEdit=1&lazy=1
 ```
 
 
