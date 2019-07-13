@@ -151,7 +151,7 @@
 				<section>
 					<img src="./img/build-together.jpeg" class="stretch plain">
 					<aside class="notes">
-						And I wanted to build the led table with someone to make the experience of creating one even more fun.<br>
+						I wanted to build the led table with someone to make the experience of creating one even more fun.<br>
 						I found the victim<br>
 						But together we did not find the time
 					</aside>
@@ -161,7 +161,7 @@
 					<aside class="notes">
 						To still do something with this energy I decided to pick the most difficult game that I would like for the table.<br>
 						And build it in a language which is not really accustomed for game programming.<br>
-						I thought if I can make the most difficult game that I wanted for the table, in a functional programming language.<br>
+						I thought if I can make that game, in a functional programming language.<br>
 						Then I could make all those game for the led table with ease
 					</aside>
 				</section>
@@ -218,7 +218,7 @@
 				<section data-background-image="./img/movie-scene.jpg">
 					<aside class="notes">
 						When you create games you can look at it as if you are directing movies.<br>
-						This is the scene of a movie. Or a scene in your game.<br>
+						This is the scene of a movie. But it could as well be scene in our game.<br>
 						And those are Actors. Which will be Actors in the game as well.<br>
 					</aside>
 				</section>
@@ -346,7 +346,7 @@
 				</section>
 
 				<section>
-          			<img src="./img/game-loop-5.png" class="plain">
+					<img src="./img/game-loop-5.png" class="plain">
 					<aside class="notes">
 						Remembering our game loop. We would like to update on a stable 17 millisecond.<br>
 						For as many 17 milliseconds since we did our last loop<br>
@@ -452,8 +452,8 @@
 					<img src="./img/composition-over-inheritance.png" class="plain">
 					<aside class="notes">
 						The benefits of Composition over Inheritance<br>
-						This is nice because we do not have inheritance in Elm anyway hehe<br>
-						Elm can do the composition which we call the Actor Component system in game programming<br>
+						This is nice because we do not have inheritance in Elm anyway<br>
+						Elm can do the composition which we call the Actor Component system which is the same as Entity Component sytem in game programming<br>
 					</aside>
 				</section>
 
@@ -478,7 +478,7 @@
 				<section>
 					<img src="./img/elm-actor-component-3.png" class="plain">
 					<aside class="notes">
-						Now a little sidetrack<br>
+						You can also group similar components together<br>
 						ControllerInputComponent and WalkAiComponent kinda do the same thing. They control the actors movement etc<br>
 						Those components just do it in their own way, via collected input or some ai logic<br>
 						We could group them together under one ControlComponent to make it clearer that you should not have both<br>
@@ -498,7 +498,7 @@
 				<section>
 					<h2>Implementing behaviour</h2>
 					<aside class="notes">
-						Types in Elm are just data. They are not like objects which can have function and behaviour<br>
+						Types in Elm are just data.<br>
 						In other words, our components do not do anything yet.<br>
 						We need to add functions for their behaviours<br>
 						Now the fun stuff begins
@@ -589,9 +589,68 @@
 				</section>
 
 				<section>
-					<h3>LevelUpdate -> LifetimeComponent</h3>
+					<ul>
+						<li>Decide coordinate to update</li>
+						<li>
+							<ul>
+								<li>Get actors from level on coordinate</li>
+								<li>
+									<ul>
+										<li>Get components per actor</li>
+										<li>
+											<ul>
+												<li>Update the component</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
 					<aside class="notes">
-						To better show how the folding goes
+
+					</aside>
+				</section>
+
+				<section>
+					<ul>
+						<li>Decide coordinate to update</li>
+						<li>
+							<ul>
+								<li>Get actors from level on coordinate</li>
+								<li>
+									<ul>
+										<li>Get current actor from <b>accumulator</b></li>
+										<li>
+											<ul>
+												<li>
+													<ul>
+														<li>Get components per actor</li>
+														<li>
+															<ul>
+																<li>
+																	<ul>
+																		<li>Get actor from <b>accumulator</b></li>
+																		<li>
+																			<ul>
+																				<li>Update the component -> Aka update the `Level`</li>
+																			</ul>
+																		</li>
+																	</ul>
+																</li>
+															</ul>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<aside class="notes">
+
 					</aside>
 				</section>
 
