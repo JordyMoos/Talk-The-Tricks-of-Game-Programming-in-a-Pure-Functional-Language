@@ -122,8 +122,8 @@
 					<aside class="notes">
 						And these numbers are per second<br>
 						I found that pretty awesome.<br>
-						But there are so many people here big companies from big companies like Facebook and Google.<br>
-						And those people will be like: Mhe tho's are rookie numbers
+						But there are so many people here from big companies like Google, Facebook, Uber.<br>
+						And those people will be like: Mhe these are rookie numbers
 					</aside>
 				</section>
 
@@ -186,7 +186,7 @@
 				<section data-background-image="./img/led-table.jpg">
 					<aside class="notes">
 						I wanted to build a led table like this for years.<br>
-						So I could make games and play them together on my table<br>
+						So I could make games and play them together with friends on my table<br>
 						Which I thought would be really cool.
 					</aside>
 				</section>
@@ -229,7 +229,7 @@
 						So I found this victim, and we where like all happy<br>
 						And because of the years of programming experience differences, we decided to make it in python on the raspberry pi<br>
 						The victim did not really had enough time at that moment<br>
-						So we kinda promised that I should not look into python or play with the leds.
+						So we had to postpone starting until a later date
 					</aside>
 				</section>
 
@@ -253,9 +253,9 @@
 				<section>
 					<img src="./img/boulder-dash-nes.jpg" class="stretch plain">
 					<aside class="notes">
-						I though if I could make Boulder Dash in Elm, a pure functional language. Then I can probably make any of them in python<br>
+						I though if I could make Boulder Dash in Elm, a pure functional language. Then I can probably make any of those games in python<br>
 						Who has played this game?<br>
-						I suppose all the locals know about the game<br>
+						It was on the Commodore and PC 20 years ago<br>
 						The idea of the game is pretty simple<br>
 						You are this little hero - Rockford<br>
 						And you need to collect the diamonds
@@ -285,7 +285,8 @@
 				<section>
 					<img src="./img/elm-logo.png" class="plain">
 					<aside class="notes">
-						Every game programming book I have is based on object oriented programming. Most of them in c++ but other languages like Java follow the same patterns.<br>
+						Every game programming book I have is in an imperative programming style.<br>
+						Most of them in c++ but other languages like Java follow the same patterns.<br>
 						I was learning the functional paradigm and played with Elm for a few years.<br>
 						And I wanted to try to see how it would be to create a game in Elm.<br>
 						To learn from an experiment.<br>
@@ -310,16 +311,17 @@
 
 				<section>
 					<ul>
-						<li>Frontend only</li>
-						<li class="fragment">Pure Functional language</li>
+						<li>Pure Functional language</li>
 						<li class="fragment">Statically Typed</li>
 						<li class="fragment">Strongly Typed</li>
 						<li class="fragment">Friendly Compiler</li>
+						<li class="fragment">Frontend only</li>
 					</ul>
 					<aside class="notes">
 						Some of the characteristics of Elm is that it is a Pure Functional language, Its statically and stronly typed.<br>
 						Which allows the compiler to complain when I'm doing things wrong again<br>
-						But its complains are often so clear that you can learn a lot from the compiler
+						But its complains are often so clear that you can learn a lot from the compiler<br>
+						And its a Frontend only language
 					</aside>
 				</section>
 
@@ -369,9 +371,7 @@
 
 				<section data-background-image="./img/architecture.jpg">
 					<aside class="notes">
-						So far Elm is not that different. At least to languages like Haskell.<br>
-						It is compared to javascript hehe<br>
-						What Elm also has is some kind of architecture<br>
+						The more important thing we need to known about Elm is its architecture<br>
 						Its something that enforces the flow of your application
 					</aside>
 				</section>
@@ -425,6 +425,7 @@
 						To visualize the architecture in one picture<br>
 						The puppets and their orientation is your Model<br>
 						The theater is the result of the view<br>
+						That is what you would see in the browser<br>
 						The kids are producing messages<br>
 						Which the `Update` person received and it adjust the model as requested<br>
 					</aside>
@@ -502,8 +503,7 @@
 						});
 					</script>
 					<aside class="notes">
-						Now if we let the actors move one tile each update then that will look like this<br>
-						I added walls so our update logic can use that to reverse direction
+						Now if we let the actors move one tile each update then that will look like this
 					</aside>
 				</section>
 
@@ -746,13 +746,6 @@
 					<img src="./img/elm-component-implementation-2.png" class="plain">
 					<aside class="notes">
 						This function will try to get the TransformComponentData from the actor. But he might not have any therefor we return a Maybe.
-					</aside>
-				</section>
-
-				<section>
-					<img src="./img/elm-component-implementation-3.png" class="plain">
-					<aside class="notes">
-						And we are in a FP environment therefor here is a more fancy implementation with curring and function composition
 					</aside>
 				</section>
 

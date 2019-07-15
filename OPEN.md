@@ -1,6 +1,8 @@
 
 ### Start the game
 
+OPEN HOTSPOT
+
 ```
 cd game
 python -m SimpleHTTPServer 8001
